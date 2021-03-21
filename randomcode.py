@@ -274,3 +274,32 @@ for tag in tags:
     print(tag.get("href",None))
 
 """
+"""
+import urllib.request, urllib.parse, urllib.error
+from bs4 import BeautifulSoup
+
+url = input('Enter - ')
+count =int(input("count: "))
+count = count-1
+position = int(input("position: "))
+position = position+1
+
+urllist = []
+taglist = []
+
+connections = 0
+while connections < position : #you need to connect five times
+    taglist = []
+    print('Retrieving: ', url)
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    tags = soup('a')
+
+    for i in range(position):
+        for tag in tags:
+            taglist.append(tag)
+
+    url = taglist[count].get('href', None)
+    urllist.append(url)
+
+    connections = connections + 1
