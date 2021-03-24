@@ -1,4 +1,3 @@
-""
 #assignment 2.3
 hrs = input("Enter Hours:")
 hrs=int(hrs)
@@ -16,7 +15,6 @@ else:
   nh=h-40
   nr=r*1.5
   print((nh*nr)+(40*r))
-
 
 #assignment 3.3
 score = input("Enter Score: ")
@@ -37,7 +35,6 @@ elif score < 0.6:
 else: 
   print("value out of range(too low)")
 
-
 #Assignment 4.6
 def computepay(h,r):
   if h <= 40.0:
@@ -47,14 +44,12 @@ def computepay(h,r):
     nr=r*1.5
     return((nh*nr)+(40*r))
 
-
 hrs = input("Enter Hours: ")
 hrs=int(hrs)
 rate = input ("Enter Rate: ")
 rate = float(rate)
 p = computepay(hrs,rate)
 print("Pay",p)
-
 
 #Assignment 5.2
 largest = None
@@ -78,14 +73,12 @@ while True:
 print("Maximum is", largest)
 print("Minimum is", smallest)
 
-
 #assignment 6.5
 text = "X-DSPAM-Confidence:  0.8475"
 num = text.find("0")
 textslice = text[num:]
 textslice = float(textslice)
 print(textslice)
-
 
 #assignment7.1
 fname = input("Enter file name: ")
@@ -94,7 +87,6 @@ for line in fhandle:
   line = line.rstrip()
   line = line.upper()
   print(line)
-
 
 #assignment7.2
 fname = input("Enter file name: ")
@@ -135,7 +127,6 @@ myVar ="UNIVERSITY OF MICHIGAN"
 print(myVar[::2])#slice from start to end every 2 places
 print(myVar.count("I"))#finds and counts the number of times the value is in a string
 
-
 #Assignment 8.4
 fname = input("Enter file name: ")
 fh = open(fname)
@@ -148,7 +139,6 @@ for line in fh:
       lst.append(w)
 lst.sort()
 print(lst)
-
 
 #Assignment 8.5
 fname = input("Enter file name: ")#mbox-short.txt
@@ -165,7 +155,6 @@ for line in fh:
   print(address)
   count=count+1
 print("There were", count, "lines in the file with From as the first word")
-
 
 #assignment9.4
 name = input("Enter file:")
@@ -213,8 +202,6 @@ lst=sorted(lst)
 for k,v in lst:
   print(k,v)
 
-
-
 #assignment 11
 import re
 fh = open("regex_sum_1150582.txt")
@@ -225,11 +212,8 @@ for line in fh:
   for num in foundNum:
     total+=int(num)
   #secound for loop adds each number found
-  
-
 
 print (total)
-
 
 #connecting to a web server with python
 import socket
@@ -273,8 +257,7 @@ tags = soup("a")
 for tag in tags:
     print(tag.get("href",None))
 
-"""
-"""
+
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 
@@ -303,3 +286,44 @@ while connections < position : #you need to connect five times
     urllist.append(url)
 
     connections = connections + 1
+   
+#xml parse
+
+import urllib.request, urllib.parse, urllib.error
+import xml.etree.ElementTree as ET
+import ssl
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+URL = input('Enter location: ')
+
+uh = urllib.request.urlopen(URL, context=ctx)
+
+data = uh.read()
+
+tree = ET.fromstring(data)
+count=0
+for item in tree.findall(".//count"):
+    item.find(".//count")
+    count=count+int(item.text)
+print(count)
+
+
+#json parse
+
+import json
+
+data ='''
+    {
+    "name" : "chuck",
+    "phone" : {"type" : "intl", "number" : "+44 7766 536 409"},
+    "email" : {"hide" : "yes"}
+    }
+'''
+info =json.loads(data)
+print("Name",info["name"])
+print("Phone",info["phone"]["type"])
+print("Phone Number",info["phone"]["number"])
+print("Hide",info["email"]["hide"])
